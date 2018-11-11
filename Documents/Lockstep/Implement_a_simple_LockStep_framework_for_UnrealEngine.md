@@ -9,6 +9,8 @@
 
 当然，还是强调一下，个人的理解和方法不见得正确，仅供参考，欢迎批评指正。
 
+转载本文请注明[出处](https://noslopforever.github.io/Documents/Lockstep/Implement_a_simple_LockStep_framework_for_UnrealEngine/)，本文后续可能会继续修改。
+
 # LockStep同步模式简介
 帧同步本身并不是什么新东西，早期的局域网联机游戏里这是一种比较主流的实现方式。但是自己参与的项目一直没有使用这个的机会，而自己虽然有自己做这个的打算，但是也一直卡在自己那不成器的服务器实践上，后来随着各种事情忙来忙去，也就这样放着了。
 
@@ -18,7 +20,7 @@
 
 换个角度来想，可以把LockStep想象成一个速度更快的回合制游戏，回合制游戏下，一个回合内，每个用户按照顺序执行输入，全部完成输入后，开始下一个回合。LockStep则是在一个Step时间片内，收集所有用户的输入，并且按照统一的顺序统一应用它们。
 
-![LockStep的同步](./images/Conception_LockStep.svg)
+![LockStep的同步](https://noslopforever.github.io/Documents/Lockstep/images/Conception_LockStep.svg)
 
 可以看出，LockStep机制最核心的就是，**保证逻辑、包括玩家输入部分的逻辑处理，在所有终端上的执行顺序和参数是完全一致的。**只有这样才能保证每个Step走完后，各终端的结果一致。
 
@@ -116,11 +118,11 @@ Replicate相对就简单了，这个是单向的，只可能从服务器的Autho
 
 在联机模式下，这几个类大致的情况，在Dedicated Server模式下：
 
-![DS模式下的游戏框架](./images/GameFramework_DS_C.svg)
+![DS模式下的游戏框架](https://noslopforever.github.io/Documents/Lockstep/images/GameFramework_DS_C.svg)
 
 在Listen Server模式下：
 
-![LS模式下的游戏框架](./images/GameFramework_LS_C.svg)
+![LS模式下的游戏框架](https://noslopforever.github.io/Documents/Lockstep/images/GameFramework_LS_C.svg)
 
 
 
@@ -135,7 +137,7 @@ Replicate相对就简单了，这个是单向的，只可能从服务器的Autho
 
 绘图如下：
 
-![基本的结构图](./images/Design_SequenceDesign.svg)
+![基本的结构图](https://noslopforever.github.io/Documents/Lockstep/images/Design_SequenceDesign.svg)
 
 这里面我们首先需要注意，对于典型的LockStep而言，除了整个游戏框架那些根本绕不开的概念，也就是GameMode、GameState、PlayerController、PlayerState、World（umap、关卡蓝图）之外，**服务器本身一般是不同步其它游戏对象的信息**，即便是那些已经安置在关卡中的对象也是如此，它们应当被设置为不进行Replicate。
 
@@ -176,7 +178,7 @@ Replicate相对就简单了，这个是单向的，只可能从服务器的Autho
 
 服务器发StepAdvance时，一个Step内可能收到很多个客户端的不同的控制消息，所以数据结构应该像这样：
 
-![服务器到客户端通知的数据结构](./images/CodeLog_StepActionInfo.png)
+![服务器到客户端通知的数据结构](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_StepActionInfo.png)
 
 这样，我们需要确保我们LockStepDemo使用一个我们自定义的GameMode，这个GameMode需要挂接一个ServerLockStepComponent。
 
@@ -188,7 +190,7 @@ Replicate相对就简单了，这个是单向的，只可能从服务器的Autho
 
 LockStep游戏开始时，需要做一些准备，在ServerLockStepComponent里增加一个AuthStartLockStepGame方法，添加如下代码：
 
-![ServerLockStepComponent::AuthStartLockStepGame](./images/CodeLog_ServerLockStepComponent__AuthStartLockStepGame.png)
+![ServerLockStepComponent::AuthStartLockStepGame](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_ServerLockStepComponent__AuthStartLockStepGame.png)
 
 在这里面我们为所有PlayerController挂接必要的ClientLockStepComponent，这样开发PlayerController的时候，不需要再手动为其添加这个Component了，防止忘了操作导致的不必要的麻烦。
 
@@ -198,19 +200,19 @@ LockStep游戏开始时，需要做一些准备，在ServerLockStepComponent里�
 
 在服务器ServerLockStepComponent的TickComponent中添加如下代码：
 
-![ServerLockStepComponent::TickComponent](./images/CodeLog_ServerLockStepComponent__TickComponent.png)
+![ServerLockStepComponent::TickComponent](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_ServerLockStepComponent__TickComponent.png)
 
 服务器累积一个时间，只要超过了我们设定的某个周期，就触发一次StepAdvance通知。
 
 通知的时候，通过每个PlayerController挂接的ClientLockStepComponent来发送Server到客户端的RPC消息：
 
-![ServerLockStepComponent::AuthDoStepAdvance](./images/CodeLog_ServerLockStepComponent__AuthDoStepAdvance.png)
+![ServerLockStepComponent::AuthDoStepAdvance](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_ServerLockStepComponent__AuthDoStepAdvance.png)
 
 为ClientLockStepComponent添加S2C_StepAdvance的RPC方法，在这个方法里下断点，就可以检验是否成功发出StepAdvance消息了。
 
 这里，如果要测试的话，需要派生一个GameMode蓝图，为其挂接ServerLockStepComponent，并在蓝图的合适时机调用AuthStartLockStepGame。
 
-![GameMode的组件和蓝图](./images/CodeLog_MyGameMode.png)
+![GameMode的组件和蓝图](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_MyGameMode.png)
 
 我们这里取的是游戏服务开启两秒后。
 
@@ -232,13 +234,13 @@ Tick这里有个小问题需要考虑，虚幻自身有一套WorldTick了，这�
 
 按照这个思路，我们在ClientLockStepComponent::BeginPlay里面挂接我们自己的Tick代理，并且实现这个代理：
 
-![客户端Tick代理](./images/CodeLog_ClientLockStepComponent__OnWorldPostActorTick.png)
+![客户端Tick代理](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_ClientLockStepComponent__OnWorldPostActorTick.png)
 
 其功能目前就是把之前入对的Steps执行起来。
 
 执行代码中，最主要的就是两个部分，执行所有ClientAction，以及通知所有需要被通知的Actor，Step来了：
 
-![客户端Step执行](./images/CodeLog_ClientLockStepComponent__ProcessQueuedSteps.png)
+![客户端Step执行](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_ClientLockStepComponent__ProcessQueuedSteps.png)
 
 ## 客户端初始化时机、对象创建、控制
 
@@ -254,19 +256,19 @@ Tick这里有个小问题需要考虑，虚幻自身有一套WorldTick了，这�
 
 **由于在客户端创建，所以我们创建出来的Pawn，在服务器端是没有对等实体的。**未来同步操作消息的时候，我们需要同步操作的是哪个对象，此时由于Pawn在服务器端没有实体，因此试图像默认RPC机制那样同步指针就不现实了。所以这里我们必须**建立一个Pawn表，为创建出来的这些Pawn来分配编号，顺带也就需要提供我们自己的Spawn节点**。所有这些处理，都放到了ClientLockStepComponent里面：
 
-![CreatePawn和FindPawn](./images/CodeLog_CreateAndFindPawn.png)
+![CreatePawn和FindPawn](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_CreateAndFindPawn.png)
 
 默认情况下，虚幻的PlayerController必须是Possess在服务器端存在实体的Pawn，但是在目前的情况下就不现实了。
 
 所以这里我们需要**派生一个专门的PlayerController，为其增加针对性的LockStepPossess**：
 
-![LockStepPossess](./images/CodeLog_LockStepPC__LockStepPossess.png)
+![LockStepPossess](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_LockStepPC__LockStepPossess.png)
 
 相当于是把服务器版的Possess简化抽取出来，当然这样的做法充满了坏味道，后续应该还会有许多问题。但是基本上这里要想让Pawn接收到输入，不损害虚幻本身的默认假设是很困难的。**可能只能确保说后续的逻辑开发，都处于某种受控的条件下，提供一系列项目特定的节点和方法，屏蔽掉引擎本身的一些节点和方法，并且核心接口由LockStep系统的设计者参与设计。**
 
 整个创建过程，请参考Demo工程的关卡蓝图：
 
-![LockStep游戏开始时的创建工作](./images/CodeLog_CreateVehicleWhenLockStepStart.png)
+![LockStep游戏开始时的创建工作](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_CreateVehicleWhenLockStepStart.png)
 
 到这一步为止，如果在编辑器内开启多人测试的话，应该能看到跟全部客户端数量相同的车，在各自的客户端上创建出来，且不同客户端Focus的车是不一样的。
 
@@ -275,13 +277,13 @@ Tick这里有个小问题需要考虑，虚幻自身有一套WorldTick了，这�
 
 首先是在Pawn的输入处理里面，把直接的操作改为发送消息。客户端我们可以获取到属于这个客户端的LocalPlayerController，这样也就可以获得其身上挂接的ClientLockStepComponent，然后通过ClientLockStepComponent的C2S_RequestStep发送消息给服务器即可：
 
-![输入消息处理](./images/CodeLog_ClientActionRequest.png)
+![输入消息处理](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_ClientActionRequest.png)
 
 这里C2S_RequestStep是一个RPC方法，运行在Server端，消息中需要带上我们当前操作的是哪辆车的ID，如前所述，不带ID的话，同步给其他玩家，其他玩家是没办法定位到“操作的到底是谁”的。
 
 服务器收到消息后，将其插入到ServerLockStepComponent的ServerCurrentStepInfo中。这样下一帧AuthDoStepAdvance的时候，随着ServerCurrentStepInfo就会一同被发给全部客户端。
 
-![服务器Gather输入消息](./images/CodeLog_ServerGatherActionRequest.png)
+![服务器Gather输入消息](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_ServerGatherActionRequest.png)
 
 日志或者断点，如果没有异常情况的话，消息会很正常地发到服务器，并最终同步给所有其他客户端。
 
@@ -305,7 +307,7 @@ VehicleAdvanced是通过物理来完成位移处理的，而位移处理可以�
 
 而具体的物理更新代码如下：
 
-![客户端物理更新](./images/CodeLog_ClientStep_UpdatePhysics.png)
+![客户端物理更新](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_ClientStep_UpdatePhysics.png)
 
 到此为止，基本上主要的框架就构建起来了，接下来开始编译、调试。
 
@@ -314,7 +316,7 @@ VehicleAdvanced是通过物理来完成位移处理的，而位移处理可以�
 
 跟踪以后发现，虚幻默认的4轮车UWheeledVehicleMovementComponent4W本身就是基于传统的服务器-客户端结构进行设计，所以，当我们的输入消息发给了UWheeledVehicleMovementComponent4W之后，在它UpdateState的时候，试图把消息通过RPC发给服务器（%UE_ROOT%/Engine/Plugins/Runtime/PhysXVehicles/Source/PhysXVehicles/Private/WheeledVehicleMovementComponent.cpp）：
 
-![ServerUpdateState](./images/CodeLog_CallServerUpdateState.png)
+![ServerUpdateState](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_CallServerUpdateState.png)
 
 这个ServerUpdateState是一个RPC的Server Function。
 
@@ -322,15 +324,15 @@ RPC这个机制在默认情况下，即便创建的是纯客户端对象，机�
 
 所以我们需要从默认的UWheeledVehicleMovementComponent4W派生一个我们自己的ULockStepWheeledVehicleMoveComp4W，然后重新实现这个方法，将其改为纯客户端的版本。
 
-![Movement的改动](./images/CodeLog_ULockStepWheeledVehicleMoveComp4W__UpdateState.png)
+![Movement的改动](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_ULockStepWheeledVehicleMoveComp4W__UpdateState.png)
 
 并且，Pawn那里创建Movement的地方也要做少许修改：
 
-![Pawn替换Movement](./images/CodeLog_Pawn_ChangeDefaultMovement.png)
+![Pawn替换Movement](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_Pawn_ChangeDefaultMovement.png)
 
 至此为止，基本上就跟我们github上的代码差不太远了，编译，运行，应该是可以直接通过了：
 
-![Result!](./images/DemoScreenGif.gif)
+![Result!](https://noslopforever.github.io/Documents/Lockstep/images/DemoScreenGif.gif)
 
 ## 后续计划
 
