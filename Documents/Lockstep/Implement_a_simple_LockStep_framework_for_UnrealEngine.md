@@ -9,7 +9,7 @@
 
 当然，还是强调一下，个人的理解和方法不见得正确，仅供参考，欢迎批评指正。
 
-转载本文请注明[出处](https://noslopforever.github.io/Documents/Lockstep/Implement_a_simple_LockStep_framework_for_UnrealEngine/)，本文后续可能会继续修改。
+转载本文请注明[出处](https://noslopforever.github.io/Documents/Lockstep/Implement_a_simple_LockStep_framework_for_UnrealEngine)，本文后续可能会继续修改。
 
 本文对应的[代码工程](https://github.com/noslopforever/NFUESample_VehicleAdvLockStep)也在github上，后续也会随着文档更新。
 
