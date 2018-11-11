@@ -11,6 +11,8 @@
 
 转载本文请注明[出处](https://noslopforever.github.io/Documents/Lockstep/Implement_a_simple_LockStep_framework_for_UnrealEngine/)，本文后续可能会继续修改。
 
+本文对应的[代码工程](https://github.com/noslopforever/NFUESample_VehicleAdvLockStep)也在github上，后续也会随着文档更新。
+
 # LockStep同步模式简介
 帧同步本身并不是什么新东西，早期的局域网联机游戏里这是一种比较主流的实现方式。但是自己参与的项目一直没有使用这个的机会，而自己虽然有自己做这个的打算，但是也一直卡在自己那不成器的服务器实践上，后来随着各种事情忙来忙去，也就这样放着了。
 
