@@ -1,0 +1,74 @@
+graph GameFramework {
+    compound = true;
+    splines = "line";
+    rank = "source";
+    ranksep = 2.5;
+    constraint = false;
+
+    bgcolor = "gray";
+    node [ fontname = "Microsoft YaHei", shape=record, color=skyblue, style=filled];
+    graph [ fontname = "Microsoft YaHei" ];
+
+    # Cluster server
+    subgraph clusterHostClient {
+        label = "Host Client";
+        rank = "source";
+        bgcolor = "palegreen3";
+
+        # Game Mode in server
+        nGM [label="GameMode\n ** Only in host **"];
+
+        # Player 0 in server
+        subgraph clusterPlayer0 {
+            label = "Host Player";
+            bgcolor = "royalblue";
+
+            nPC0 [label = "PlayerController\n ** Only in host.**"];
+            nPS0 [label = "PlayerState\n** Host and ALL clients.**"];
+        };
+
+        # Game State in server
+        nGS [label="GameState\n ** Host and ALL clients **"];
+
+        # Player 1 in server
+        subgraph clusterPlayer1 {
+            label = "Player 1";
+            bgcolor = "sienna1";
+
+            nPC1 [label = "PlayerController 1\n ** Host and owner client.**"];
+            nPS1 [label = "PlayerState 1\n** Host and ALL clients.**"];
+        };
+
+    };
+
+    # Client 1
+    subgraph clusterClient1 {
+        label = "Client 1";
+        bgcolor = "sienna1";
+        rank="source";
+
+        nC1GS [label="GameState"];
+
+        # Player0 in Client 1
+        subgraph clusterC1Player0 {
+            label = "Host Player in Client 1";
+            bgcolor = "royalblue";
+            nC1PS0 [label = "PlayerState 0"]
+        };
+        # Player1 in Client 1
+        subgraph clusterC1Player1 {
+            label = "Client Player 1";
+            bgcolor = "sienna1";
+
+            nC1PC1 [label = "PlayerController 1"]
+            nC1PS1 [label = "PlayerState 1"]
+        };
+    };
+
+    #nPC1 -- nC1PC1 [ltail=clusterPlayer1, lhead=clusterC1Player1];
+    nPC1 -- nC1PC1;
+    nPS0 -- nC1PS0;
+    nPS1 -- nC1PS1;
+    nGS -- nC1GS;
+
+}

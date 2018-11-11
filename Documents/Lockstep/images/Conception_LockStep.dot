@@ -1,0 +1,52 @@
+digraph LockStep {
+    compound = true;
+    node [ fontname = "Microsoft YaHei", shape=record, color=skyblue, style=filled];
+    graph [ fontname = "Microsoft YaHei" ];
+    bgcolor = "gray";
+    mincross = 1.0;
+    ratio = "auto";
+
+    subgraph clusterLocal {
+        label = "Local\n本机";
+        bgcolor = royalblue;
+
+        LocalInputRequest [ label = "Input\n玩家输入" ];
+		LocalInput1 [ label="Input\n玩家输入" ];
+        LocalGetStepAdvance [ label="Get Step Advance\n获取到Step通知" ];
+
+        LocalInputRequest -> LocalInput1 [ minlen = 2 ];
+        LocalInput1 -> LocalGetStepAdvance [ minlen = 1 ];
+    };
+
+    subgraph clusterRemote {
+        label = "Remote\n远端（其他玩家）";
+        bgcolor = sienna1;
+
+        RemoteInputRequest [ label="Input" ];
+        RemoteGetStepAdvance [ label="Get Step Advance" ];
+
+        RemoteInputRequest -> RemoteGetStepAdvance [ minlen = 2 ];
+    };
+
+    subgraph clusterServer {
+        label = "Server\n服务器";
+        bgcolor = palegreen3;
+
+        WaitNextStep0 [ label = "Wait for next Step\n 等待下一个Step\n\nGather actions\n收集玩家行为\n" ];
+
+        DoStepAdvance [ label = "DoStepAdvance\n触发Step通知\n" ];
+        CanNextFrameStart [ label="Can next step start?\n是否可以处理下个Step？" ];
+
+        WaitNextStep1 [ label = "Wait for next Step\n\n Gather actions }" ];
+        WaitNextStep0 -> DoStepAdvance -> CanNextFrameStart;
+        CanNextFrameStart -> WaitNextStep1 [ label = "Yes"; ];
+        CanNextFrameStart -> CanNextFrameStart [ label = "No"; constraint="false"; ];
+    };
+
+    DoStepAdvance -> LocalGetStepAdvance;
+    DoStepAdvance -> RemoteGetStepAdvance;
+    LocalInputRequest -> WaitNextStep0;
+    RemoteInputRequest -> WaitNextStep0;
+    LocalInput1 -> WaitNextStep1;
+
+}

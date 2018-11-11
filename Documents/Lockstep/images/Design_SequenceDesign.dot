@@ -1,0 +1,33 @@
+digraph LockStep {
+    compound = true;
+    node [ fontname = "Microsoft YaHei", shape=record];
+    graph [ fontname = "Microsoft YaHei", rankdir=LR ];
+    bgcolor = "gray";
+    mincross = 1.0;
+    ratio = "auto";
+
+    subgraph clusterClient {
+        label = "Client";
+        bgcolor = royalblue;
+        node [];
+
+        Client [
+            label = "ClientLockStep | | <f0> +InputHandlers | <f1> +StepAdvanceHandler"
+            shape=record
+            ];
+    }
+    subgraph clusterServer {
+        label = "Client";
+        bgcolor = palegreen3;
+        node [shape=record];
+
+        Server [
+            label = "ServerLockStep | | <f0> +GatherInputs | <f1> +StepAdvance\n Trigger and Broadcast"
+            shape=record
+        ];
+    }
+
+    Client:f0 -> Server:f0;
+    Server:f1 -> Client:f1;
+
+}
