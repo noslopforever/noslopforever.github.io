@@ -17,7 +17,7 @@ digraph LockStep {
             ];
     }
     subgraph clusterServer {
-        label = "Client";
+        label = "Server";
         bgcolor = palegreen3;
         node [shape=record];
 

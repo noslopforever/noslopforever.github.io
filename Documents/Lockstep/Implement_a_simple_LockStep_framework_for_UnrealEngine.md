@@ -226,7 +226,7 @@ LockStep游戏开始时，需要做一些准备，在ServerLockStepComponent里�
 
 因此这里，我们S2C_StepAdvance实际上就是把Step信息缓存到客户端的某个池子里，留待Tick时处理。
 
-Tick这里有个小问题需要考虑，虚幻自身有一套WorldTick了，这里最直接的考虑是改引擎代码：*Step消息过来时，通过修改最外层Tick的DeltaTime为Step时，来得到我们期望的结果。这样做的好处是蓝图的接口不需要任何调整，AI蓝图、EventTick之类的都还可以正常使用。*
+Tick这里有个小问题需要考虑，虚幻自身有一套WorldTick了，这里最直接的考虑是改引擎代码：*Step消息过来时，通过修改最外层Tick的DeltaTime为Step时间，来得到我们期望的结果。这样做的好处是蓝图的接口不需要任何调整，AI蓝图、EventTick之类的都还可以正常使用。*
 
 但其实，这条路没有想象中那么好。Step每隔50 ms才过来一次，这个过程中WorldTick不可能在那干等。**Step过来时的处理和Step没来时的处理是有区分的，这就需要增加某种“当前这一帧是Step帧”这样的东西。**这样事实上最终逻辑维护起来并不会简单多少，同样要付出区分Step和Frame的心力。
 
@@ -238,7 +238,7 @@ Tick这里有个小问题需要考虑，虚幻自身有一套WorldTick了，这�
 
 ![客户端Tick代理](https://noslopforever.github.io/Documents/Lockstep/images/CodeLog_ClientLockStepComponent__OnWorldPostActorTick.png)
 
-其功能目前就是把之前入对的Steps执行起来。
+其功能目前就是把之前入队的Steps执行起来。
 
 执行代码中，最主要的就是两个部分，执行所有ClientAction，以及通知所有需要被通知的Actor，Step来了：
 
@@ -303,7 +303,7 @@ VehicleAdvanced是通过物理来完成位移处理的，而位移处理可以�
 
 简单来说，我们需要做的是下面几件事情：
 1. 首先，关闭World自身的PhysicsTick，这个可以通过设置**UWorld::bShouldSimulatePhysics**成员为false来实现。
-1. 第二，提供我们自己的一套独立Tick，在合适的时机来做Physics的Update。这个可以通过**FWorldDelegates::OnWorldPostActorTick**代理来实现。
+1. 第二，在我们自己的[客户端StepTick更新](#客户端更新)里面，在合适的时机来做Physics的Update。
 
 所以我们首先在ClientLockStepComponent::BeginPlay里面关闭掉bShouldSimulatePhysics，当然这个具体的触发时机，可以根据需要做调整。总之，**在游戏世界的任何物理体开始更新前，就需要做好这件事。**
 

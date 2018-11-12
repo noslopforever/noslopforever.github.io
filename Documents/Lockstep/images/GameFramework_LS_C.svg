@@ -13,25 +13,25 @@
 <polygon fill="#7ccd7c" stroke="black" points="8,-225 8,-342 1203,-342 1203,-225 8,-225"/>
 <text text-anchor="middle" x="605.5" y="-326.8" font-family="Microsoft YaHei" font-size="14.00">Host Client</text>
 </g>
-<g id="clust3" class="cluster"><title>clusterPlayer1</title>
-<polygon fill="#ff8247" stroke="black" points="758,-233 758,-311 1195,-311 1195,-233 758,-233"/>
-<text text-anchor="middle" x="976.5" y="-295.8" font-family="Microsoft YaHei" font-size="14.00">Player 1</text>
-</g>
 <g id="clust2" class="cluster"><title>clusterPlayer0</title>
-<polygon fill="royalblue" stroke="black" points="382,-233 382,-311 750,-311 750,-233 382,-233"/>
-<text text-anchor="middle" x="566" y="-295.8" font-family="Microsoft YaHei" font-size="14.00">Host Player</text>
+<polygon fill="royalblue" stroke="black" points="827,-233 827,-311 1195,-311 1195,-233 827,-233"/>
+<text text-anchor="middle" x="1011" y="-295.8" font-family="Microsoft YaHei" font-size="14.00">Host Player</text>
+</g>
+<g id="clust3" class="cluster"><title>clusterPlayer1</title>
+<polygon fill="#ff8247" stroke="black" points="382,-233 382,-311 819,-311 819,-233 382,-233"/>
+<text text-anchor="middle" x="600.5" y="-295.8" font-family="Microsoft YaHei" font-size="14.00">Player 1</text>
 </g>
 <g id="clust4" class="cluster"><title>clusterClient1</title>
-<polygon fill="#ff8247" stroke="black" points="415,-8 415,-123 991,-123 991,-8 415,-8"/>
-<text text-anchor="middle" x="703" y="-107.8" font-family="Microsoft YaHei" font-size="14.00">Client 1</text>
-</g>
-<g id="clust6" class="cluster"><title>clusterC1Player1</title>
-<polygon fill="#ff8247" stroke="black" points="701,-16 701,-92 983,-92 983,-16 701,-16"/>
-<text text-anchor="middle" x="842" y="-76.8" font-family="Microsoft YaHei" font-size="14.00">Client Player 1</text>
+<polygon fill="#ff8247" stroke="black" points="353,-8 353,-123 931,-123 931,-8 353,-8"/>
+<text text-anchor="middle" x="642" y="-107.8" font-family="Microsoft YaHei" font-size="14.00">Client 1</text>
 </g>
 <g id="clust5" class="cluster"><title>clusterC1Player0</title>
-<polygon fill="royalblue" stroke="black" points="523,-16 523,-92 693,-92 693,-16 523,-16"/>
-<text text-anchor="middle" x="608" y="-76.8" font-family="Microsoft YaHei" font-size="14.00">Host Player in Client 1</text>
+<polygon fill="royalblue" stroke="black" points="753,-16 753,-92 923,-92 923,-16 753,-16"/>
+<text text-anchor="middle" x="838" y="-76.8" font-family="Microsoft YaHei" font-size="14.00">Host Player in Client 1</text>
+</g>
+<g id="clust6" class="cluster"><title>clusterC1Player1</title>
+<polygon fill="#ff8247" stroke="black" points="463,-16 463,-92 745,-92 745,-16 463,-16"/>
+<text text-anchor="middle" x="604" y="-76.8" font-family="Microsoft YaHei" font-size="14.00">Client Player 1</text>
 </g>
 <!-- nGM -->
 <g id="node1" class="node"><title>nGM</title>
@@ -41,24 +41,24 @@
 </g>
 <!-- nPC0 -->
 <g id="node2" class="node"><title>nPC0</title>
-<polygon fill="skyblue" stroke="skyblue" points="602,-241.5 602,-279.5 742,-279.5 742,-241.5 602,-241.5"/>
-<text text-anchor="middle" x="672" y="-264.3" font-family="Microsoft YaHei" font-size="14.00">PlayerController</text>
-<text text-anchor="middle" x="672" y="-249.3" font-family="Microsoft YaHei" font-size="14.00"> ** Only in host.**</text>
+<polygon fill="skyblue" stroke="skyblue" points="1047,-241.5 1047,-279.5 1187,-279.5 1187,-241.5 1047,-241.5"/>
+<text text-anchor="middle" x="1117" y="-264.3" font-family="Microsoft YaHei" font-size="14.00">PlayerController</text>
+<text text-anchor="middle" x="1117" y="-249.3" font-family="Microsoft YaHei" font-size="14.00"> ** Only in host.**</text>
 </g>
 <!-- nPS0 -->
 <g id="node3" class="node"><title>nPS0</title>
-<polygon fill="skyblue" stroke="skyblue" points="390.5,-241.5 390.5,-279.5 583.5,-279.5 583.5,-241.5 390.5,-241.5"/>
-<text text-anchor="middle" x="487" y="-264.3" font-family="Microsoft YaHei" font-size="14.00">PlayerState</text>
-<text text-anchor="middle" x="487" y="-249.3" font-family="Microsoft YaHei" font-size="14.00">** Host and ALL clients.**</text>
+<polygon fill="skyblue" stroke="skyblue" points="835.5,-241.5 835.5,-279.5 1028.5,-279.5 1028.5,-241.5 835.5,-241.5"/>
+<text text-anchor="middle" x="932" y="-264.3" font-family="Microsoft YaHei" font-size="14.00">PlayerState</text>
+<text text-anchor="middle" x="932" y="-249.3" font-family="Microsoft YaHei" font-size="14.00">** Host and ALL clients.**</text>
 </g>
 <!-- nC1PS0 -->
 <g id="node8" class="node"><title>nC1PS0</title>
-<polygon fill="skyblue" stroke="skyblue" points="533.5,-24.5 533.5,-60.5 640.5,-60.5 640.5,-24.5 533.5,-24.5"/>
-<text text-anchor="middle" x="587" y="-38.8" font-family="Microsoft YaHei" font-size="14.00">PlayerState 0</text>
+<polygon fill="skyblue" stroke="skyblue" points="807.5,-24.5 807.5,-60.5 914.5,-60.5 914.5,-24.5 807.5,-24.5"/>
+<text text-anchor="middle" x="861" y="-38.8" font-family="Microsoft YaHei" font-size="14.00">PlayerState 0</text>
 </g>
 <!-- nPS0&#45;&#45;nC1PS0 -->
 <g id="edge2" class="edge"><title>nPS0&#45;&#45;nC1PS0</title>
-<path fill="none" stroke="black" d="M495.354,-241.455C514.318,-200.493 560.415,-100.923 579.018,-60.7401"/>
+<path fill="none" stroke="black" d="M926.069,-241.455C912.604,-200.493 879.875,-100.923 866.667,-60.7401"/>
 </g>
 <!-- nGS -->
 <g id="node4" class="node"><title>nGS</title>
@@ -68,42 +68,42 @@
 </g>
 <!-- nC1GS -->
 <g id="node7" class="node"><title>nC1GS</title>
-<polygon fill="skyblue" stroke="skyblue" points="423,-24.5 423,-60.5 515,-60.5 515,-24.5 423,-24.5"/>
-<text text-anchor="middle" x="469" y="-38.8" font-family="Microsoft YaHei" font-size="14.00">GameState</text>
+<polygon fill="skyblue" stroke="skyblue" points="361,-24.5 361,-60.5 453,-60.5 453,-24.5 361,-24.5"/>
+<text text-anchor="middle" x="407" y="-38.8" font-family="Microsoft YaHei" font-size="14.00">GameState</text>
 </g>
 <!-- nGS&#45;&#45;nC1GS -->
 <g id="edge4" class="edge"><title>nGS&#45;&#45;nC1GS</title>
-<path fill="none" stroke="black" d="M144.573,-241.455C211.707,-200.493 374.89,-100.923 440.745,-60.7401"/>
+<path fill="none" stroke="black" d="M139.394,-241.455C194.769,-200.493 329.372,-100.923 383.694,-60.7401"/>
 </g>
 <!-- nPC1 -->
 <g id="node5" class="node"><title>nPC1</title>
-<polygon fill="skyblue" stroke="skyblue" points="977.5,-241.5 977.5,-279.5 1186.5,-279.5 1186.5,-241.5 977.5,-241.5"/>
-<text text-anchor="middle" x="1082" y="-264.3" font-family="Microsoft YaHei" font-size="14.00">PlayerController 1</text>
-<text text-anchor="middle" x="1082" y="-249.3" font-family="Microsoft YaHei" font-size="14.00"> ** Host and owner client.**</text>
+<polygon fill="skyblue" stroke="skyblue" points="601.5,-241.5 601.5,-279.5 810.5,-279.5 810.5,-241.5 601.5,-241.5"/>
+<text text-anchor="middle" x="706" y="-264.3" font-family="Microsoft YaHei" font-size="14.00">PlayerController 1</text>
+<text text-anchor="middle" x="706" y="-249.3" font-family="Microsoft YaHei" font-size="14.00"> ** Host and owner client.**</text>
 </g>
 <!-- nC1PC1 -->
 <g id="node9" class="node"><title>nC1PC1</title>
-<polygon fill="skyblue" stroke="skyblue" points="835,-24.5 835,-60.5 975,-60.5 975,-24.5 835,-24.5"/>
-<text text-anchor="middle" x="905" y="-38.8" font-family="Microsoft YaHei" font-size="14.00">PlayerController 1</text>
+<polygon fill="skyblue" stroke="skyblue" points="597,-24.5 597,-60.5 737,-60.5 737,-24.5 597,-24.5"/>
+<text text-anchor="middle" x="667" y="-38.8" font-family="Microsoft YaHei" font-size="14.00">PlayerController 1</text>
 </g>
 <!-- nPC1&#45;&#45;nC1PC1 -->
 <g id="edge1" class="edge"><title>nPC1&#45;&#45;nC1PC1</title>
-<path fill="none" stroke="black" d="M1067.21,-241.455C1033.65,-200.493 952.055,-100.923 919.127,-60.7401"/>
+<path fill="none" stroke="black" d="M702.742,-241.455C695.346,-200.493 677.368,-100.923 670.113,-60.7401"/>
 </g>
 <!-- nPS1 -->
 <g id="node6" class="node"><title>nPS1</title>
-<polygon fill="skyblue" stroke="skyblue" points="766.5,-241.5 766.5,-279.5 959.5,-279.5 959.5,-241.5 766.5,-241.5"/>
-<text text-anchor="middle" x="863" y="-264.3" font-family="Microsoft YaHei" font-size="14.00">PlayerState 1</text>
-<text text-anchor="middle" x="863" y="-249.3" font-family="Microsoft YaHei" font-size="14.00">** Host and ALL clients.**</text>
+<polygon fill="skyblue" stroke="skyblue" points="390.5,-241.5 390.5,-279.5 583.5,-279.5 583.5,-241.5 390.5,-241.5"/>
+<text text-anchor="middle" x="487" y="-264.3" font-family="Microsoft YaHei" font-size="14.00">PlayerState 1</text>
+<text text-anchor="middle" x="487" y="-249.3" font-family="Microsoft YaHei" font-size="14.00">** Host and ALL clients.**</text>
 </g>
 <!-- nC1PS1 -->
 <g id="node10" class="node"><title>nC1PS1</title>
-<polygon fill="skyblue" stroke="skyblue" points="709.5,-24.5 709.5,-60.5 816.5,-60.5 816.5,-24.5 709.5,-24.5"/>
-<text text-anchor="middle" x="763" y="-38.8" font-family="Microsoft YaHei" font-size="14.00">PlayerState 1</text>
+<polygon fill="skyblue" stroke="skyblue" points="471.5,-24.5 471.5,-60.5 578.5,-60.5 578.5,-24.5 471.5,-24.5"/>
+<text text-anchor="middle" x="525" y="-38.8" font-family="Microsoft YaHei" font-size="14.00">PlayerState 1</text>
 </g>
 <!-- nPS1&#45;&#45;nC1PS1 -->
 <g id="edge3" class="edge"><title>nPS1&#45;&#45;nC1PS1</title>
-<path fill="none" stroke="black" d="M854.646,-241.455C835.682,-200.493 789.585,-100.923 770.982,-60.7401"/>
+<path fill="none" stroke="black" d="M490.174,-241.455C497.381,-200.493 514.898,-100.923 521.967,-60.7401"/>
 </g>
 </g>
 </svg>
